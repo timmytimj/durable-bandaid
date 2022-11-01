@@ -9,7 +9,7 @@ These are sledgehammers and in some cases not easily reversed.
 Run to disable Windows update with group policy (requires Pro, Education, or Enterprise)
 
 
-### killdedefender.ps1 - aptly named 
+### toggle_defender.ps1 - aptly named 
 
 *If you have windows defender active when you download this file*
 ![badtime](assets/badtime.png)
