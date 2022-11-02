@@ -1,3 +1,5 @@
 notworking/
 *.bak
-.DS_STORE
+.DS_STORE.vscode
+*.log
+preplugin/
