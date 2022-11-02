@@ -1,0 +1,8 @@
+#Changelog (not exhaustive, possibly not informative)
+
+ Toast Defender timmytim, 20211229
+ RUNAS invokation methods have gensis in the dastardly mind of @AveYo
+ changed: 20211229 - added -win 1 to powershell invocation
+ changed: 20211230 - added -nop to powershell invocation
+ changed: 20211230 - added -c to powershell invocation to allow for iex invocation of script text from file (rather than file path)
+
