@@ -25,7 +25,7 @@ $u=0;$w=whoami /groups;if($w-like'*1-5-32-544*'){$u=1};if($w-like'*1-16-12288*')
 
 ## Comment to suppress warning notifications every time per user
 $notif='HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance'
-New-Item $notif -ea 0|out-null; Remove-ItemProperty $notif.replace('Settings','Current') -Recurse -Force -ea 0
+New-Item $notif -ea 0|out-null; Remove-Item $notif.replace('Settings','Current') -Recurse -Force -ea 0
 Set-ItemProperty $notif Enabled 0 -Type Dword -Force -ea 0; if ($TOGGLE -eq 7) { Remove-ItemProperty $notif Enabled -Force -ea 0}
 
 ## Comment to hide system tray icon FOREVER
@@ -103,7 +103,7 @@ if ($env:1 -eq 7) {
     Set-ItemProperty $_.PSet-ItemPropertyath '(Default)' 1 -Type Dword -Force -ea 0
   }
   ## enable legacy edge smartscreen
-  Remove-ItemProperty 'HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter' -Force -ea 0
+  Remove-Item 'HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter' -Force -ea 0
   ## enable av
    Remove-ItemProperty 'HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection' DisableRealtimeMonitoring -Force -ea 0
    Remove-ItemProperty 'HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender' DisableAntiSet-ItemPropertyyware -Force -ea 0
