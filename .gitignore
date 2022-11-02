@@ -3,3 +3,5 @@ notworking/
 .DS_STORE.vscode
 *.log
 preplugin/
+
+scripts/.DS_Store

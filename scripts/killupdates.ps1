@@ -21,36 +21,36 @@ $WUP = "HKLM:SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\"
 $AUP = "HKLM:SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU"
 
 If(Test-Path -Path $WUP) {
-    ri -Path $WUP -Recurse
+    Remove-Item -Path $WUP -Recurse
 }
 
 
 If ($UpdateValue -gt 0) {
-    ni -Path $WUP
-    ni -Path $AUP
+    New-Item -Path $WUP
+    New-Item -Path $AUP
 }
 
 If ($UpdateValue -eq 1) {
-    sp -Path $AUP -Name NoAutoUpdate -Value 1
+    Set-ItemProperty -Path $AUP -Name NoAutoUpdate -Value 1
 }
 
 If ($UpdateValue -eq 2) {
-    sp -Path $AUP -Name NoAutoUpdate -Value 0
-    sp -Path $AUP -Name AUOptions -Value 2
-    sp -Path $AUP -Name ScheduledInstallDay -Value 0
-    sp -Path $AUP -Name ScheduledInstallTime -Value 3
+    Set-ItemProperty -Path $AUP -Name NoAutoUpdate -Value 0
+    Set-ItemProperty -Path $AUP -Name AUOptions -Value 2
+    Set-ItemProperty -Path $AUP -Name ScheduledInstallDay -Value 0
+    Set-ItemProperty -Path $AUP -Name ScheduledInstallTime -Value 3
 }
 
 If ($UpdateValue -eq 3) {
-    sp -Path $AUP -Name NoAutoUpdate -Value 0
-    sp -Path $AUP -Name AUOptions -Value 3
-    sp -Path $AUP -Name ScheduledInstallDay -Value 0
-    sp -Path $AUP -Name ScheduledInstallTime -Value 3
+    Set-ItemProperty -Path $AUP -Name NoAutoUpdate -Value 0
+    Set-ItemProperty -Path $AUP -Name AUOptions -Value 3
+    Set-ItemProperty -Path $AUP -Name ScheduledInstallDay -Value 0
+    Set-ItemProperty -Path $AUP -Name ScheduledInstallTime -Value 3
 }
 
 If ($UpdateValue -eq 4) {
-    sp -Path $AUP -Name NoAutoUpdate -Value 0
-    sp -Path $AUP -Name AUOptions -Value 4
-    sp -Path $AUP -Name ScheduledInstallDay -Value 0
-    sp -Path $AUP -Name ScheduledInstallTime -Value 3
+    Set-ItemProperty -Path $AUP -Name NoAutoUpdate -Value 0
+    Set-ItemProperty -Path $AUP -Name AUOptions -Value 4
+    Set-ItemProperty -Path $AUP -Name ScheduledInstallDay -Value 0
+    Set-ItemProperty -Path $AUP -Name ScheduledInstallTime -Value 3
 }
