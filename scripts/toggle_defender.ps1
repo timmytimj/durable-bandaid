@@ -1,11 +1,6 @@
 @(Set-Variable "0=%~f0"^)#) & powershell -win 1 -nop -c iex([io.file]::ReadAllText($env:0)) & exit /b
 
-## Toast Defender timmytim, 20211229
-## RUNAS invokation methods have gensis in the dastardly mind of @AveYo
-## changed: 20211229 - added -win 1 to powershell invocation
-## changed: 20211230 - added -nop to powershell invocation
-## changed: 20211230 - added -c to powershell invocation to allow for iex invocation of script text from file (rather than file path)
-
+##It is written like this so you can copy-paste, it does not work use a minified version
 
 Set-ItemProperty 'HKCU:\Volatile Environment' 'ToggleDefender' @'
 if ($(sc.exe qc windefend) -like '*TOGGLE*') {$TOGGLE=7;$KEEP=6;$A='Enable';$S='OFF'}else{$TOGGLE=6;$KEEP=7;$A='Disable';$S='ON'}
@@ -47,24 +42,49 @@ if ($u -lt 2) {
 
 ## 2: admin-user elevated: get ti/system via runasti lean and mean snippet [$window hide:0x0E080600 show:0x0E080610]
 if ($u -eq 2) {
-  $A=[AppDomain]::CurrentDomain."DefineDynami`cAssembly"(1,1)."DefineDynami`cModule"(1);$D=@();0..5|%{$D+=$A."Defin`eType"('A'+$_,
-  1179913,[ValueType])} ;4,5|%{$D+=$D[$_]."MakeByR`efType"()} ;$I=[Int32];$J="Int`Ptr";$P=$I.module.GetType("System.$J"); $F=@(0)
+  $A=[AppDomain]::CurrentDomain."DefineDynami`cAssembly"(1,1)."DefineDynami`cModule"(1);
+	$D=@();
+	0..5|%{$D+=$A."Defin`eType"('A'+$_,
+  1179913,[ValueType])} ;
+	4,5|%{$D+=$D[$_]."MakeByR`efType"()} ;
+	$I=[Int32];
+	$J="Int`Ptr";
+	$P=$I.module.GetType("System.$J");
+	 $F=@(0)
   $F+=($P,$I,$P),($I,$I,$I,$I,$P,$D[1]),($I,$P,$P,$P,$I,$I,$I,$I,$I,$I,$I,$I,[Int16],[Int16],$P,$P,$P,$P),($D[3],$P),($P,$P,$I,$I)
-  $S=[String]; $9=$D[0]."DefinePInvok`eMethod"('CreateProcess',"kernel`32",8214,1,$I,@($S,$S,$I,$I,$I,$I,$I,$S,$D[6],$D[7]),1,4)
-  1..5|%{$k=$_;$n=1;$F[$_]|%{$9=$D[$k]."DefineFie`ld"('f'+$n++,$_,6)}};$T=@();0..5|%{$T+=$D[$_]."CreateT`ype"();$Z=[uintptr]::size
-  New-Variable ('T'+$_)([Activator]::CreateInstance($T[$_]))}; $H=$I.module.GetType("System.Runtime.Interop`Services.Mar`shal");
-
-
-  ## commented out for good reasons, but left in because I forgot what they were
-  ## $H=$I.module.GetType("System.Runtime.Interop`Services.Mar`shal"); $H.GetMethod("GetLastWin32Error").Invoke($null,$null)
-  ## $H.GetMethod("GetHRForLastWin32Error").Invoke($null,$null) ## note the difference in return value and badnness if it is 0x80070005
-
-  $WP=$H."GetMeth`od"("Write$J",[type[]]($J,$J)); $HG=$H."GetMeth`od"("AllocHG`lobal",[type[]]'int32'); $v=$HG.invoke($null,$Z)
-  'TrustedInstaller','lsass'|%{if(!$pn){net1 start $_ 2>&1 >$null;$pn=[Diagnostics.Process]::GetProcessesByName($_)[0];}}
-  $WP.invoke($null,@($v,$pn.Handle)); $SZ=$H."GetMeth`od"("SizeOf",[type[]]'type'); $T1.f1=131072; $T1.f2=$Z; $T1.f3=$v; $T2.f1=1
-  $T2.f2=1;$T2.f3=1;$T2.f4=1;$T2.f6=$T1;$T3.f1=$SZ.invoke($null,$T[5]);$T4.f1=$T3;$T4.f2=$HG.invoke($null,$SZ.invoke($null,$T[2]))
-  $H."GetMeth`od"("StructureTo`Ptr",[type[]]($D[2],$J,'boolean')).invoke($null,@(($T2-as $D[2]),$T4.f2,$false));$window=0x0E080600
-  $9=$T[0]."GetMeth`od"('CreateProcess').Invoke($null,@($null,$cmd,0,0,0,$window,0,$null,($T4-as $D[4]),($T5-as $D[5]))); break
+  $S=[String];
+	 $9=$D[0]."DefinePInvok`eMethod"('CreateProcess',"kernel`32",8214,1,$I,@($S,$S,$I,$I,$I,$I,$I,$S,$D[6],$D[7]),1,4)
+  1..5|%{$k=$_;
+	$n=1;
+	$F[$_]|%{$9=$D[$k]."DefineFie`ld"('f'+$n++,$_,6)}};
+	$T=@();
+	0..5|%{$T+=$D[$_]."CreateT`ype"();
+	$Z=[uintptr]::size
+  New-Variable ('T'+$_)([Activator]::CreateInstance($T[$_]))};
+	 $H=$I.module.GetType("System.Runtime.Interop`Services.Mar`shal");
+        $WP=$H."GetMeth`od"("Write$J",[type[]]($J,$J));
+	 $HG=$H."GetMeth`od"("AllocHG`lobal",[type[]]'int32');
+	 $v=$HG.invoke($null,$Z)
+  'TrustedInstaller','lsass'|%{if(!$pn){net1 start $_ 2>&1 >$null;
+	$pn=[Diagnostics.Process]::GetProcessesByName($_)[0];
+	}}
+  $WP.invoke($null,@($v,$pn.Handle));
+	 $SZ=$H."GetMeth`od"("SizeOf",[type[]]'type');
+	 $T1.f1=131072;
+	 $T1.f2=$Z;
+	 $T1.f3=$v;
+	 $T2.f1=1
+  $T2.f2=1;
+	$T2.f3=1;
+	$T2.f4=1;
+	$T2.f6=$T1;
+	$T3.f1=$SZ.invoke($null,$T[5]);
+	$T4.f1=$T3;
+	$T4.f2=$HG.invoke($null,$SZ.invoke($null,$T[2]))
+  $H."GetMeth`od"("StructureTo`Ptr",[type[]]($D[2],$J,'boolean')).invoke($null,@(($T2-as $D[2]),$T4.f2,$false));
+	$window=0x0E080600
+  $9=$T[0]."GetMeth`od"('CreateProcess').Invoke($null,@($null,$cmd,0,0,0,$window,0,$null,($T4-as $D[4]),($T5-as $D[5])));
+	 break
 }
 
 ## Cleanup
@@ -199,5 +219,5 @@ $env:1=$null
 # done!
 '@ -Force -ea 0; $k=@();$k+=Get-ItemProperty Registry::HKEY_Users\S-1-5-21*\Volatile* ToggleDefender -ea 0;Invoke-Expression($k[0].ToggleDefender)
 ## done!
-## paste the following line in a new powershell window to toggle defender on/off
-## or run the script again from an elevated powershell window (even if you'll become powerful anyway)
+## paste the PASTEABLE VERSION
+
